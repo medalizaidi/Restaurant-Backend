@@ -2,7 +2,7 @@ package com.restaurant.back_end_app.auth;
 
 import com.restaurant.back_end_app.Enum.Role;
 import com.restaurant.back_end_app.config.JwtService;
-import com.restaurant.back_end_app.repository.UserRepository;
+import com.restaurant.back_end_app.user.UserRepository;
 import com.restaurant.back_end_app.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

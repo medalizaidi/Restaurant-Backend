@@ -1,10 +1,7 @@
 package com.restaurant.back_end_app.food;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +20,9 @@ public class Food {
     private Long id;
 
     private String name;
-    private String picture;
+    @Lob
+    @Column(name = "picture", columnDefinition = "BLOB")
+    private byte[] picture;
     private Double price;
     private String description;
     private String category;

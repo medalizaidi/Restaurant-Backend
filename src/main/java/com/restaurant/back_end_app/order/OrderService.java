@@ -3,8 +3,9 @@ package com.restaurant.back_end_app.order;
 import com.restaurant.back_end_app.dto.OrderDTO;
 import com.restaurant.back_end_app.food.Food;
 import com.restaurant.back_end_app.food.FoodRepository;
-import com.restaurant.back_end_app.repository.UserRepository;
+import com.restaurant.back_end_app.user.UserRepository;
 import com.restaurant.back_end_app.user.User;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -80,5 +81,16 @@ public class OrderService {
         } else {
             // Handle the case where the order doesn't exist
         }
+    }
+    public Order updateOrderStatus(Long orderId, Status newStatus) {
+        // Find the order by ID
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
+
+        // Update the status
+        order.setStatus(newStatus);
+
+        // Save the updated order
+        return orderRepository.save(order);
     }
 }

@@ -1,6 +1,5 @@
-package com.restaurant.back_end_app.repository;
+package com.restaurant.back_end_app.user;
 
-import com.restaurant.back_end_app.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
