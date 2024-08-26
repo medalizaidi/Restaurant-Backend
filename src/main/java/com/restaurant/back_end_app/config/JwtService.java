@@ -21,17 +21,21 @@ public class JwtService {
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     };
-    public String generateToken(UserDetails userDetails){
-        return generateToken(new HashMap<>(),userDetails);
+    public String generateToken(UserDetails userDetails, Long userId, String role){
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("userId", userId);
+        extraClaims.put("role", role);
+        return generateToken(extraClaims, userDetails);
     }
+
     public String generateToken(
-            Map<String,Object> extraClaims,
+            Map<String, Object> extraClaims,
             UserDetails userDetails
     ){
         return Jwts.builder().setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000 * 60 * 24 * 12))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24 * 12)) // Adjust expiration as needed
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256).compact();
     }
     public boolean isTokenValid(String token,UserDetails userDetails){
@@ -60,5 +64,13 @@ public class JwtService {
     private Key getSignInKey(){
         byte[] keyByte= Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyByte);
+    }
+    public Long extractUserId(String token) {
+        return extractClaim(token, claims -> claims.get("userId", Long.class));
+    }
+
+    // Method to extract role from the token
+    public String extractRole(String token) {
+        return extractClaim(token, claims -> claims.get("role", String.class));
     }
 }
