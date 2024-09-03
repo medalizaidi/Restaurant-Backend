@@ -93,4 +93,7 @@ public class OrderService {
         // Save the updated order
         return orderRepository.save(order);
     }
+    public List<Order> getOrdersByUserId(Long userId) {
+        return orderRepository.findOrdersByUserId(userId);
+    }
 }

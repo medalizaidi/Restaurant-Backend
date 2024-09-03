@@ -49,4 +49,8 @@ public class OrderController {
         Order updatedOrder = orderService.updateOrderStatus(orderId, status);
         return ResponseEntity.ok(updatedOrder);
     }
+    @GetMapping("/user/{userId}")
+    public List<Order> getOrdersByUserId(@PathVariable Long userId) {
+        return orderService.getOrdersByUserId(userId);
+    }
 }
