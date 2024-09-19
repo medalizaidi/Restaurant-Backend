@@ -27,7 +27,7 @@ public class OrderController {
         return order.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Order> createOrder(@RequestBody OrderDTO request) {
         Order createdOrder = orderService.createOrder(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);

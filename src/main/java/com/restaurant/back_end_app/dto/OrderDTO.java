@@ -20,7 +20,8 @@ public class OrderDTO {
 
     private Long userId;
     private List<OrderItemDTO> items;
-
+    private float total;
+    private  String comment;
 
 
     // Getters and setters

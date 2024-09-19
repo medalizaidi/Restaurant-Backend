@@ -35,6 +35,8 @@ public class OrderService {
         order.setClient(user);
         order.setOrderDate(LocalDateTime.now());
         order.setStatus(Status.PENDING);
+        order.setTotal(request.getTotal()); // Set total from DTO
+        order.setComment(request.getComment()); // Set comment from DTO
 
         Order savedOrder = orderRepository.save(order);
 
@@ -54,6 +56,8 @@ public class OrderService {
 
         return savedOrder;
     }
+
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }

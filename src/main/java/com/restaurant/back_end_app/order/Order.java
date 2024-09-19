@@ -36,4 +36,8 @@ public class Order {
     private Status status;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderItem> orderItems;
+    @Column
+    private float total;
+    @Column
+    private String comment;
 }
