@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mysql-standalone:
+    image: mysql
+    container_name: mysql-standalone
+    env_file:
+      - ./mysql.env
+    ports:
+      - "3308:3306"
+
+  springboot-docker-container:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: springboot-docker-container
+    env_file:
+      - ./env.list
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql-standalone
